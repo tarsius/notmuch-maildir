@@ -32,6 +32,7 @@
 (require 'notmuch)
 
 (defvar notmuch-maildir-separator-regexp "[-.]")
+(defvar notmuch-maildir-nosplit-regexp "[@]")
 
 (defun notmuch-hello-insert-maildirs ()
   "Insert the maildir tree section."
@@ -40,7 +41,7 @@
     (dolist (dir (notmuch-maildir--list-directories))
       (let* ((parts  (mapcan
                       (lambda (part)
-                        (if (string-match-p "@" part)
+                        (if (string-match-p notmuch-maildir-nosplit-regexp part)
                             (list part)
                           (split-string part notmuch-maildir-separator-regexp)))
                       (split-string dir "[/\\]")))
