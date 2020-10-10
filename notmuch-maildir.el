@@ -36,7 +36,7 @@
 
 (defun notmuch-hello-insert-maildirs ()
   "Insert the maildir tree section."
-  (widget-insert "Maildirs: \n\n")
+  (widget-insert "Maildirs:\n\n")
   (let ((default-directory (notmuch-maildir--database-path)))
     (dolist (dir (notmuch-maildir--list-directories))
       (let* ((parts  (mapcan
