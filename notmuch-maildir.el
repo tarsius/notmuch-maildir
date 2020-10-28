@@ -89,6 +89,7 @@
                    (cons dir (notmuch-maildir--list-directories-1 dir)))))
           (directory-files directory t "^[^.]")))
 
+;;;###autoload
 (defun notmuch-maildir-inject-section ()
   "Inject `notmuch-hello-insert-maildirs' into `notmuch-hello-sections'."
   (unless (member 'notmuch-hello-insert-maildirs notmuch-hello-sections)
