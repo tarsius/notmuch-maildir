@@ -45,22 +45,22 @@
                             (list part)
                           (split-string part notmuch-maildir-separator-regexp)))
                       (split-string dir "[/\\]")))
-	     (depth  (1- (length parts)))
-	     (name   (car (last parts)))
+             (depth  (1- (length parts)))
+             (name   (car (last parts)))
              (string (concat (make-string (* 2 depth) ?\s) name)))
         (if (notmuch-maildir-p dir)
             (let* ((query  (format "folder:%s" dir))
-	           (unread (read (car (process-lines
+                   (unread (read (car (process-lines
                                        notmuch-command "count"
-				       (concat query " tag:unread")))))
-	           (total  (read (car (process-lines
+                                       (concat query " tag:unread")))))
+                   (total  (read (car (process-lines
                                        notmuch-command "count"
-				       query))))
+                                       query))))
                    (widget-push-button-prefix "")
-	           (widget-push-button-suffix ""))
+                   (widget-push-button-suffix ""))
               (widget-create 'push-button
-		             :notify #'notmuch-hello-widget-search
-		             :notmuch-search-terms query
+                             :notify #'notmuch-hello-widget-search
+                             :notmuch-search-terms query
                              string)
               (widget-insert (make-string (max 0 (- 30 (current-column))) ?\s))
               (widget-insert (propertize (format " [%s/%s]" unread total) 'face
@@ -84,9 +84,9 @@
 
 (defun notmuch-maildir--list-directories-1 (directory)
   (mapcan (lambda (dir)
-	    (and (file-accessible-directory-p dir)
-		 (if (notmuch-maildir-p dir)
-		     (list dir)
+            (and (file-accessible-directory-p dir)
+                 (if (notmuch-maildir-p dir)
+                     (list dir)
                    (cons dir (notmuch-maildir--list-directories-1 dir)))))
           (directory-files directory t "^[^.]")))
 
