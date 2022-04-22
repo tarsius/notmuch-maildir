@@ -5,7 +5,8 @@ PKG = notmuch-maildir
 ELS   = $(PKG).el
 ELCS  = $(ELS:.el=.elc)
 
-DEPS  = notmuch/emacs
+DEPS  = compat
+DEPS += notmuch/emacs
 
 EMACS      ?= emacs
 EMACS_ARGS ?=

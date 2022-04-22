@@ -6,7 +6,7 @@
 ;; Homepage: https://git.sr.ht/~tarsius/notmuch-maildir
 ;; Keywords: mail
 
-;; Package-Requires: ((emacs "26") (notmuch "0.30"))
+;; Package-Requires: ((emacs "26.1") (compat "28.1.1.0") (notmuch "0.30"))
 
 ;; This file is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published
@@ -29,6 +29,7 @@
 
 ;;; Code:
 
+(require 'compat)
 (require 'notmuch)
 
 (defvar notmuch-maildir-separator-regexp "[-.]")
