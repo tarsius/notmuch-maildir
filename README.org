@@ -1,0 +1,8 @@
+* Display maildirs as a tree
+
+This package displays maildirs hierarchically in Notmuch's hello
+buffer.  Call ~notmuch-maildir-inject-section~ to enable this.
+
+#+html: <br><br>
+#+html: <a href="https://stable.melpa.org/#/notmuch-maildir"><img alt="MELPA Stable" src="https://stable.melpa.org/packages/notmuch-maildir-badge.svg"/></a>
+#+html: <a href="https://melpa.org/#/notmuch-maildir"><img alt="MELPA" src="https://melpa.org/packages/notmuch-maildir-badge.svg"/></a>

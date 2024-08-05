@@ -1,4 +1,4 @@
-;;; notmuch-maildir.el --- Visualize maildirs as a tree  -*- lexical-binding:t -*-
+;;; notmuch-maildir.el --- Display maildirs as a tree  -*- lexical-binding:t -*-
 
 ;; Copyright (C) 2020-2021 Free Software Foundation, Inc.
 ;; Copyright (C) 2021-2024 Jonas Bernoulli
@@ -26,9 +26,8 @@
 
 ;;; Commentary:
 
-;; This package can visualize maildirs hierarchically in Notmuch's
-;; hello buffer.  Call `notmuch-maildir-inject-section' to enable
-;; this.
+;; This package displays maildirs hierarchically in Notmuch's hello
+;; buffer.  Call `notmuch-maildir-inject-section' to enable this.
 
 ;;; Code:
 
