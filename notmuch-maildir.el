@@ -42,8 +42,25 @@
 
 (defun notmuch-hello-insert-maildirs ()
   "Insert the maildir tree section."
-  (widget-insert notmuch-maildir-section-title ":\n\n")
-  (progn
+  (widget-insert notmuch-maildir-section-title ": ")
+  (cond
+   ((member notmuch-maildir-section-title notmuch-hello-hidden-sections)
+    (widget-create 'push-button
+		   :notify (lambda (&rest _ignore)
+			     (setq notmuch-hello-hidden-sections
+				   (delete notmuch-maildir-section-title
+                                           notmuch-hello-hidden-sections))
+			     (notmuch-hello-update))
+		   "show")
+    (widget-insert "\n"))
+   (t
+    (widget-create 'push-button
+		   :notify (lambda (&rest _ignore)
+			     (add-to-list 'notmuch-hello-hidden-sections
+					  notmuch-maildir-section-title)
+			     (notmuch-hello-update))
+		   "hide")
+    (widget-insert "\n\n")
     (pcase-dolist (`(,directory ,maildir) (notmuch-maildir--list-directories))
       (let* ((parts  (mapcan
                       (lambda (part)
@@ -72,7 +89,7 @@
               (widget-insert (propertize (format " [%s/%s]" unread total) 'face
                                          (if (zerop unread) 'default 'bold))))
           (widget-insert (propertize string 'face 'bold)))
-        (widget-insert "\n")))))
+        (widget-insert "\n"))))))
 
 (defun notmuch-maildir-p (directory)
   (file-accessible-directory-p (expand-file-name "new" directory)))
