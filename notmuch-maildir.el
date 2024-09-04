@@ -78,11 +78,12 @@
   (file-accessible-directory-p (expand-file-name "new" directory)))
 
 (defun notmuch-maildir--mail-root ()
-  (car (or (process-lines notmuch-command "config" "get" "database.mail_root")
-           (process-lines notmuch-command "config" "get" "database.path"))))
+  (file-name-as-directory
+   (car (or (process-lines notmuch-command "config" "get" "database.mail_root")
+            (process-lines notmuch-command "config" "get" "database.path")))))
 
 (defun notmuch-maildir--list-directories (&optional directory)
-  (setq directory (file-name-as-directory (or directory default-directory)))
+  (setq directory (or directory default-directory))
   (mapcar (let ((offset (length directory)))
             (lambda (dir)
               (substring dir offset)))
