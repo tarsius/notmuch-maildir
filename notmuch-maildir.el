@@ -82,12 +82,11 @@
    (car (or (process-lines notmuch-command "config" "get" "database.mail_root")
             (process-lines notmuch-command "config" "get" "database.path")))))
 
-(defun notmuch-maildir--list-directories (&optional directory)
-  (setq directory (or directory default-directory))
-  (mapcar (let ((offset (length directory)))
-            (lambda (dir)
-              (substring dir offset)))
-          (notmuch-maildir--list-directories-1 directory)))
+(defun notmuch-maildir--list-directories ()
+  (let* ((directory (notmuch-maildir--mail-root))
+         (offset (length directory)))
+    (mapcar (lambda (dir) (substring dir offset))
+            (notmuch-maildir--list-directories-1 directory))))
 
 (defun notmuch-maildir--list-directories-1 (directory)
   (mapcan (lambda (dir)
