@@ -43,19 +43,19 @@
 (defun notmuch-hello-insert-maildirs ()
   "Insert the maildir tree section."
   (widget-insert notmuch-maildir-section-title ":\n\n")
-  (let ((default-directory (notmuch-maildir--mail-root)))
-    (dolist (dir (notmuch-maildir--list-directories))
+  (progn
+    (pcase-dolist (`(,directory ,maildir) (notmuch-maildir--list-directories))
       (let* ((parts  (mapcan
                       (lambda (part)
                         (if (string-match-p notmuch-maildir-nosplit-regexp part)
                             (list part)
                           (split-string part notmuch-maildir-separator-regexp)))
-                      (split-string dir "[/\\]")))
+                      (split-string maildir "[/\\]")))
              (depth  (1- (length parts)))
              (name   (car (last parts)))
              (string (concat (make-string (* 2 depth) ?\s) name)))
-        (if (notmuch-maildir-p dir)
-            (let* ((query  (format "folder:%s" dir))
+        (if (notmuch-maildir-p directory)
+            (let* ((query  (format "folder:%s" maildir))
                    (unread (read (car (process-lines
                                        notmuch-command "count"
                                        (concat query " tag:unread")))))
@@ -85,7 +85,7 @@
 (defun notmuch-maildir--list-directories ()
   (let* ((directory (notmuch-maildir--mail-root))
          (offset (length directory)))
-    (mapcar (lambda (dir) (substring dir offset))
+    (mapcar (lambda (dir) (list dir (substring dir offset)))
             (notmuch-maildir--list-directories-1 directory))))
 
 (defun notmuch-maildir--list-directories-1 (directory)
