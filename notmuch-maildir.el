@@ -4,7 +4,7 @@
 ;; Copyright (C) 2021-2025 Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <emacs.notmuch-maildir@jonas.bernoulli.dev>
-;; Homepage: https://git.sr.ht/~tarsius/notmuch-maildir
+;; Homepage: https://github.com/tarsius/notmuch-maildir
 ;; Keywords: mail
 
 ;; Package-Version: 1.1.0
