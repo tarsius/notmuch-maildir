@@ -8,7 +8,10 @@
 ;; Keywords: mail
 
 ;; Package-Version: 1.1.0
-;; Package-Requires: ((emacs "26.1") (compat "30.0.0.0") (notmuch "0.38"))
+;; Package-Requires: (
+;;     (emacs "29.1")
+;;     (compat "30.0.2.0")
+;;     (notmuch "0.38.2"))
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
