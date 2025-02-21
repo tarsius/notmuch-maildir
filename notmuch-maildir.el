@@ -43,7 +43,7 @@
 
 (defvar notmuch-maildir-section-title "Maildirs")
 
-(defun notmuch-hello-insert-maildirs ()
+(defun notmuch-maildir-insert-maildirs ()
   "Insert the maildir tree section."
   (widget-insert notmuch-maildir-section-title ": ")
   (cond
@@ -118,11 +118,11 @@
 
 ;;;###autoload
 (defun notmuch-maildir-inject-section ()
-  "Inject `notmuch-hello-insert-maildirs' into `notmuch-hello-sections'."
-  (unless (member 'notmuch-hello-insert-maildirs notmuch-hello-sections)
+  "Inject `notmuch-maildir-insert-maildirs' into `notmuch-hello-sections'."
+  (unless (member 'notmuch-maildir-insert-maildirs notmuch-hello-sections)
     (let ((cons (member 'notmuch-hello-insert-footer notmuch-hello-sections)))
       (setcdr cons (cons (car cons) (cdr cons)))
-      (setcar cons 'notmuch-hello-insert-maildirs))))
+      (setcar cons 'notmuch-maildir-insert-maildirs))))
 
 ;;; _
 (provide 'notmuch-maildir)
