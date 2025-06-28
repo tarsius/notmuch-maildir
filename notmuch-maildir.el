@@ -87,6 +87,8 @@
               (widget-create 'push-button
                              :notify #'notmuch-hello-widget-search
                              :notmuch-search-terms query
+                             :notmuch-search-hide-excluded
+                             notmuch-search-hide-excluded
                              string)
               (widget-insert (make-string (max 0 (- 30 (current-column))) ?\s))
               (widget-insert (propertize (format " [%s/%s]" unread total) 'face
