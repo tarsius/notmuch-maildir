@@ -113,9 +113,9 @@
 (defun notmuch-maildir--list-directories-1 (directory)
   (mapcan (lambda (dir)
             (and (file-accessible-directory-p dir)
-                 (if (notmuch-maildir-p dir)
-                     (list dir)
-                   (cons dir (notmuch-maildir--list-directories-1 dir)))))
+                 (not (member (file-name-nondirectory dir)
+                              '("cur" "new" "tmp")))
+                 (cons dir (notmuch-maildir--list-directories-1 dir))))
           (directory-files directory t "^[^.]")))
 
 ;;;###autoload
