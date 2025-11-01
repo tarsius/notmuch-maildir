@@ -7,11 +7,11 @@
 ;; Homepage: https://github.com/tarsius/notmuch-maildir
 ;; Keywords: mail
 
-;; Package-Version: 1.3.0
+;; Package-Version: 1.3.1
 ;; Package-Requires: (
-;;     (emacs "29.1")
-;;     (compat "30.1")
-;;     (notmuch "0.38.2"))
+;;     (emacs   "29.1")
+;;     (compat  "30.1")
+;;     (notmuch "0.38"))
 
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
