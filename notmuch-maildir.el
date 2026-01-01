@@ -1,7 +1,7 @@
 ;;; notmuch-maildir.el --- Display maildirs as a tree  -*- lexical-binding:t -*-
 
 ;; Copyright (C) 2020-2021 Free Software Foundation, Inc.
-;; Copyright (C) 2021-2025 Jonas Bernoulli
+;; Copyright (C) 2021-2026 Jonas Bernoulli
 
 ;; Author: Jonas Bernoulli <emacs.notmuch-maildir@jonas.bernoulli.dev>
 ;; Homepage: https://github.com/tarsius/notmuch-maildir
