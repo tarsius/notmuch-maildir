@@ -47,54 +47,54 @@
   "Insert the maildir tree section."
   (widget-insert notmuch-maildir-section-title ": ")
   (cond
-   ((member notmuch-maildir-section-title notmuch-hello-hidden-sections)
-    (widget-create 'push-button
-		   :notify (lambda (&rest _ignore)
-			     (setq notmuch-hello-hidden-sections
-				   (delete notmuch-maildir-section-title
-                                           notmuch-hello-hidden-sections))
-			     (notmuch-hello-update))
-		   "show")
-    (widget-insert "\n"))
-   (t
-    (widget-create 'push-button
-		   :notify (lambda (&rest _ignore)
-			     (add-to-list 'notmuch-hello-hidden-sections
-					  notmuch-maildir-section-title)
-			     (notmuch-hello-update))
-		   "hide")
-    (widget-insert "\n\n")
-    (pcase-dolist (`(,directory ,maildir) (notmuch-maildir--list-directories))
-      (let* ((parts  (mapcan
-                      (lambda (part)
-                        (if (string-match-p notmuch-maildir-nosplit-regexp part)
-                            (list part)
-                          (split-string part notmuch-maildir-separator-regexp)))
-                      (split-string maildir "[/\\]")))
-             (depth  (1- (length parts)))
-             (name   (car (last parts)))
-             (string (concat (make-string (* 2 depth) ?\s) name)))
-        (if (notmuch-maildir-p directory)
-            (let* ((query  (format "folder:%s" maildir))
-                   (unread (read (car (process-lines
-                                       notmuch-command "count"
-                                       (concat query " tag:unread")))))
-                   (total  (read (car (process-lines
-                                       notmuch-command "count"
-                                       query))))
-                   (widget-push-button-prefix "")
-                   (widget-push-button-suffix ""))
-              (widget-create 'push-button
-                             :notify #'notmuch-hello-widget-search
-                             :notmuch-search-terms query
-                             :notmuch-search-hide-excluded
-                             notmuch-search-hide-excluded
-                             string)
-              (widget-insert (make-string (max 0 (- 30 (current-column))) ?\s))
-              (widget-insert (propertize (format " [%s/%s]" unread total) 'face
-                                         (if (zerop unread) 'default 'bold))))
-          (widget-insert (propertize string 'face 'bold)))
-        (widget-insert "\n"))))))
+    ((member notmuch-maildir-section-title notmuch-hello-hidden-sections)
+     (widget-create 'push-button
+		    :notify (lambda (&rest _ignore)
+			      (setq notmuch-hello-hidden-sections
+				    (delete notmuch-maildir-section-title
+                                            notmuch-hello-hidden-sections))
+			      (notmuch-hello-update))
+		    "show")
+     (widget-insert "\n"))
+    (t
+     (widget-create 'push-button
+		    :notify (lambda (&rest _ignore)
+			      (add-to-list 'notmuch-hello-hidden-sections
+					   notmuch-maildir-section-title)
+			      (notmuch-hello-update))
+		    "hide")
+     (widget-insert "\n\n")
+     (pcase-dolist (`(,directory ,maildir) (notmuch-maildir--list-directories))
+       (let* ((parts  (mapcan
+                       (lambda (part)
+                         (if (string-match-p notmuch-maildir-nosplit-regexp part)
+                             (list part)
+                           (split-string part notmuch-maildir-separator-regexp)))
+                       (split-string maildir "[/\\]")))
+              (depth  (1- (length parts)))
+              (name   (car (last parts)))
+              (string (concat (make-string (* 2 depth) ?\s) name)))
+         (if (notmuch-maildir-p directory)
+             (let* ((query  (format "folder:%s" maildir))
+                    (unread (read (car (process-lines
+                                        notmuch-command "count"
+                                        (concat query " tag:unread")))))
+                    (total  (read (car (process-lines
+                                        notmuch-command "count"
+                                        query))))
+                    (widget-push-button-prefix "")
+                    (widget-push-button-suffix ""))
+               (widget-create 'push-button
+                              :notify #'notmuch-hello-widget-search
+                              :notmuch-search-terms query
+                              :notmuch-search-hide-excluded
+                              notmuch-search-hide-excluded
+                              string)
+               (widget-insert (make-string (max 0 (- 30 (current-column))) ?\s))
+               (widget-insert (propertize (format " [%s/%s]" unread total) 'face
+                                          (if (zerop unread) 'default 'bold))))
+           (widget-insert (propertize string 'face 'bold)))
+         (widget-insert "\n"))))))
 
 (defun notmuch-maildir-p (directory)
   (file-accessible-directory-p (expand-file-name "new" directory)))
@@ -130,5 +130,6 @@
 (provide 'notmuch-maildir)
 ;; Local Variables:
 ;; indent-tabs-mode: nil
+;; lisp-indent-local-overrides: ((cond . 0) (interactive . 0))
 ;; End:
 ;;; notmuch-maildir.el ends here
